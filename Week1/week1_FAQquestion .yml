@@ -1,0 +1,91 @@
+Q1. Is JavaScript Single-threaded or Multi-threaded?
+
+---
+Q2.What is hoisting in JavaScript, and how does it affect Playwright test execution.
+
+---
+Q3. What is the difference between var, let, and const in terms of scoping and hoisting.
+
+---
+Q4. What is Temporal Dead Zone (TDZ) in JavaScript?
+
+---
+Q5. How does trim() improve reliability in form input automation?
+
+---
+
+Q6. Why Do We Use Strings in Automation?
+To work with :
+
+Titles
+URL
+InnerText
+Selectors
+
+Strings Declaration  --> "",'',or `` 
+
+console.log(`The response from server ${statuscode}`) -> Template literals
+---
+
+Q7. Where Do We Use split() give example with usecase ?
+
+Use case : Extracting query parameters from URL 
+
+let URL = "https://testleaf.com/?id=23234767461/"
+let arr=URL.split("?")
+
+
+
+---
+
+Q8. When would you use replaceAll() in test Automation?
+
+
+
+---
+Q9.what is the differen between == and === in JavScript ? Give example where == returns true but === returns false?
+
+
+---
+Q10. Using replace() replace login with main in the given URL and launch using Playwright -
+
+const Originalurl = "http://leaftaps.com/opentaps/control/login";
+
+
+----
+
+**************************************************************************************************************
+Assignment Questions to work :
+
+1. print login and the opentaps string from the URL?
+
+http://leaftaps.com/opentaps/control/login
+
+2. Change the string login to main in the given URL and launch using Playwright
+
+login -> main
+
+Original URL:
+`http://leaftaps.com/crmsfa/control/login`
+
+Target URL after replacement:
+`http://leaftaps.com/crmsfa/control/main`
+
+---------
+JA Coding Assignment Questions :
+
+1.check if a string is a palindrome?
+input: madam
+output: madam 
+
+2.find the most frequent character in a string?
+input : javascript
+
+3.count the number of vowels in a string
+input: function
+
+
+
+
+
+

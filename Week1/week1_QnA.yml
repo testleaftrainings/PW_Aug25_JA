@@ -1,0 +1,127 @@
+Q1. Is JavaScript Single-threaded or Multi-threaded?
+
+✅ JavaScript is single-threaded
+❗ But can handle async operations using event loop.
+
+---
+Q2.What is hoisting in JavaScript, and how does it affect Playwright test execution.
+
+Hoisting is JavaScript mechanism where the variable and named function declarations are moved to the top of their scope during the compile phase , before the code is executed.
+
+1. Named Function declaration are fully hoisted.
+2. var variables are hoisted but initilized to undefined.
+3. let and const variables are hoisted but remain in TDZ Temporal Dead Zone.
+---
+Q3. What is the difference between var, let, and const in terms of scoping and hoisting.
+
+var is function scoped and hoisted with undefined.
+let and const are block scoped but not initilized(temporal dead zone).
+---
+Q4. What is Temporal Dead Zone (TDZ) in JavaScript?
+TDZ is a phase between entering a scope and the actual declaration where accesing a let and const throws reference error.
+
+---
+Q5. How does trim() improve reliability in form input automation?
+
+const name = " Ravi "
+const trimmedName = name.trim()
+
+---
+
+Q6. Why Do We Use Strings in Automation?
+
+To work with:
+
+Titles
+
+URLs
+
+Inner text
+
+Selectors
+
+Strings can be written as: "", '', or `` (template literals)
+
+---
+
+Q7. Where Do We Use split()?
+
+Use case: Extracting query parameters from URL
+let url = "https://www.example.com/?id=099780916908kkj0/";
+let arr = url.split("?");
+console.log(arr);
+arr[1] = arr[1].replace("/", ""); // Remove trailing slash if present
+
+
+let id = arr[1].replace("id=", "");
+console.log(id); // Output: 099780916908kkj0 // Output: 099780916908kkj0
+
+---
+
+Q8. When would you use replaceAll() in test Automation?
+
+const displayPrice = "Rs 1,00,000"
+const expectedPrice = "100000";
+
+const cleanedPrice = displayPrice.replaceAll("Rs","").replaceAll(",","");
+console.log(cleanedPrice); // Output: "100000"
+
+//expect((cleanedPrice).toBe(expectedPrice)); 
+
+---
+Q9.what is the differen between == and === in JavScript ? Give example where == returns true but === returns false?
+
+'5'==5; //true ('5' of datatype string is coerced to number datatype 5 )
+'5'===5;//false (string!=number)
+
+0==false; //true ( type coercion : false becomes 0)
+0===false; // false (number!=boolean)
+
+---
+Q10. Using replace() replace login with main in the given URL and launch using Playwright -
+
+const Originalurl = "http://leaftaps.com/opentaps/control/login";
+
+// replace "login" with "main"
+const Expectedurl = Originalurl.replace("login", "main");
+
+console.log(Expectedurl);
+
+
+----
+
+**************************************************************************************************************
+Assignment Questions to work :
+
+1. print login and the opentaps string from the URL?
+
+http://leaftaps.com/opentaps/control/login
+
+2. Change the string login to main in the given URL and launch using Playwright
+
+login -> main
+
+Original URL:
+`http://leaftaps.com/crmsfa/control/login`
+
+Target URL after replacement:
+`http://leaftaps.com/crmsfa/control/main`
+
+---------
+JA Coding Assignment Questions :
+
+1.check if a string is a palindrome?
+input: madam
+output: madam 
+
+2.find the most frequent character in a string?
+input : javascript
+
+3.count the number of vowels in a string
+input: function
+
+
+
+
+
+
