@@ -1,0 +1,177 @@
+1. Types of Functions in JavaScript
+
+👉 Answer:
+JavaScript has several types of functions:
+
+Named Function / Function Declaration
+
+function add(a, b) {
+  return a + b;
+}
+
+
+Arrow Function
+
+const greet = () => {
+  return "Hello";
+}
+
+
+Callback Function
+
+function add(a, b, cb) {
+  cb();
+}
+add(1, 2, () => { console.log("Hello this is callback"); });
+
+
+Function Expression (Anonymous Function)
+
+let add = (a, b) => {
+  console.log("The addition is " + (a + b));
+};
+
+2. Can functional expressions be hoisted?
+
+👉 Answer:
+
+Function Declarations are hoisted (can be used before they are defined).
+
+Function Expressions are NOT hoisted.
+
+Example:
+
+console.log(name); // ❌ ReferenceError
+let name = "udai";
+
+add(1, 2); // ❌ Cannot access 'add' before initialization
+let add = (a, b) => {
+  console.log("The addition is " + (a + b));
+};
+
+
+So ✅ function declarations can be hoisted, ❌ function expressions cannot.
+
+3. Explain about Promise in JavaScript
+
+👉 Answer:
+A Promise represents an async operation and can be in 3 states:
+
+Pending – initial state
+
+Fulfilled – operation completed successfully (resolved)
+
+Rejected – operation failed
+
+Example:
+
+new Promise((resolve, reject) => {
+  let success = true;
+  if (success) {
+    resolve("Operation Successful");
+  } else {
+    reject("Operation Failed");
+  }
+});
+
+4. What is the protocol used in Playwright?
+
+👉 Answer:
+
+Playwright uses CDP (Chrome DevTools Protocol) to communicate with the browser.
+
+Underneath, it uses WebSocket as the communication bridge between client (test script) and browser.
+
+5. What is test() in Playwright?
+
+👉 Answer:
+
+test() is the main function provided by Playwright Test framework.
+
+It is used to define and execute test cases.
+
+Example:
+
+import { test, expect } from '@playwright/test';
+
+test('homepage has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+6. Why do we use Strings in Playwright?
+
+👉 Answer:
+We use strings in Playwright for:
+
+Selectors: "text=Login", "#username", "input[name='password']"
+
+URLs: page.goto("https://example.com")
+
+Assertions: expect(page.locator("h1")).toHaveText("Welcome")
+
+Requests/Responses: API data often comes as strings before parsing.
+
+7. Use case for split()
+
+👉 Answer:
+We use split() to break strings based on a delimiter.
+
+Example 1: Salesforce URL Path
+
+const url = "https://www.salesforce.com/sales/services/opportunities/id=1223308009";
+const parts = url.split("/");
+console.log(parts[4]); // id=1223308009
+
+
+Example 2: Query Param Extraction
+
+const url = "https://www.salesforce.com/sales/services/opportunities?id=112355";
+const arr = url.split("?");
+console.log(arr[1]); // id=112355
+
+8. Use case for replace()
+
+👉 Answer:
+We use replace() to remove/replace parts of a string.
+
+Example: Extract ID
+
+const url = "https://www.salesforce.com/sales/services/opportunities?id=112355";
+const arr = url.split("?");
+const id = arr[1].replace("id=", "");
+console.log(id); // 112355
+
+9. What are async and await in Playwright?
+
+👉 Answer:
+
+async/await is used to handle asynchronous operations.
+
+await pauses execution until a promise resolves.
+
+Example:
+
+test('login to application', async ({ page }) => {
+  try {
+    await page.goto('https://example.com');
+    await page.fill('#username', 'udai');
+    await page.fill('#password', 'password123');
+    await page.click('button#login');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+10. How does Playwright handle auto-waiting and retries?
+
+👉 Answer:
+
+Playwright auto-waits for elements to be ready before performing actions (click, type, etc).
+
+If an action fails (e.g., element not visible), Playwright retries automatically until timeout.
+
+Example:
+
+await page.click('button#submit'); 
+// Playwright waits until button is visible, stable, and enabled.
