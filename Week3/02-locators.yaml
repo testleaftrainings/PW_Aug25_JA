@@ -1,0 +1,100 @@
+ 
+classroom:
+---------
+
+Salesforce: New Task  
+---------------------
+
+Steps :
+1. Go to https://login.salesforce.com/?locale=in 
+2. And login using credentials. [username : ravindran.ramdas@testleaf.com, password : RaviSalesTest]
+3. Click on the "+" icon (6th icon from top right corner)
+4. Choose and click "New Task" from dropdown.
+5. Now get the xpath for "Subject" label web element.
+
+Hint : New Task  younger cousin to elder
+ 
+//input[@class='slds-combobox__input slds-input']/preceding::label[text()='Subject']
+
+leaftaps: First leadid
+-----------------------
+
+Steps :
+1. Go to "http://leaftaps.com/opentaps/control/login" and login.
+2. Click CRM/SFA .
+3. Click "Leads" select the first lead from the list of leads
+
+leaftaps: First leadid paren to child
+
+(//div[@class='x-grid3-cell-inner x-grid3-col-partyId']/a)[1]
+ 
+Myntra: Checkbox
+-----------------
+
+-> Go to mynthra.com choose "MEN" from the tab available.
+-> Select the check box of "Roadster" under the brands
+
+Myntra: Checkbox elder sibling to younger sibling
+
+//input[@value='Roadster']/following-sibling::div
+ 
+
+ 
+Interview Questions Locators:
+--------------------------
+
+1. Can CSS move from child to parent like XPath?
+
+No.
+
+
+
+2. What’s the difference between page.locator() and page.$()?
+
+page.locator() → Returns a Locator object, supports auto-waiting, retries, multiple interactions.
+
+page.$() → Returns a single ElementHandle, no retries, less recommended.
+
+Example:
+
+await page.locator('#login').click();   // recommended
+const btn = await page.$('#login');     // ElementHandle
+await btn.click();                      // manual wait needed
+
+3. Difference between page.locator() and page.getBy*() locators?
+
+page.locator() → Uses CSS/XPath selectors. Example: page.locator("#username").
+
+page.getBy*() → Uses semantic locators (role, text, label, placeholder, testId). Example: page.getByPlaceholder("Email").
+👉 Recommended: getBy*() because it’s more readable and stable.
+
+4. Difference between locator.click() and page.click()?
+
+locator.click() → Works on a Locator object, supports auto-waiting and retries.
+
+page.click() → Direct action, needs selector every time, less flexible.
+👉 Recommended: locator.click() for reliability.
+
+ 5. How does Playwright handle auto-waiting for locators?
+
+Playwright automatically waits for elements to be:
+
+Attached to the DOM
+
+Visible
+
+Enabled
+👉 So no need for sleep() or manual waits.
+
+ 6. Difference between first(), last(), and nth() in locators?
+
+locator.first() → Selects the first element.
+
+locator.last() → Selects the last element.
+
+locator.nth(i) → Selects element at index i (0-based).
+
+
+
+When you have multiple matching elements, you get error as "STRICT MODE VIOLATION".
+ 

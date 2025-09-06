@@ -1,0 +1,118 @@
+Week3 JA Topics 
+----------------
+
+1. Dropdown.
+2. Xpath locators.
+3. CSS Selectors.
+4. Playlocators.
+
+
+1. Dropdown Interview questions :
+
+### ✅ **Q1. What happens if you use `selectOption()` on a custom dropdown built with `<div>` instead of `<select>`?**
+
+### ✅ **Q2. How would you select a dropdown option that becomes visible only after hovering over another element?**
+
+### ✅ **Q3. How do you select multiple options from a `<select multiple>` dropdown?**
+
+<select id="locator" multiple>
+  <option value="OPT1">Option1</option>    
+  <option value="OPTION2">Second Option</option> 
+  <option value="OPT3">Third Option</option>  
+  <option value="OPT4">Fourth Option</option>
+</select>
+
+
+### ✅ **Q4. How do you verify the selected option from a dropdown?**
+<select id="country">
+  <option value="IN">India</option>
+  <option value="US">United States</option>
+  <option value="UK">United Kingdom</option>
+</select>
+
+### ✅ **Q5. A dropdown option is hidden behind a scrollable container. How will you select it?*
+
+### ✅ **Q6. What’s the difference between using `.click()` on an option vs `selectOption()`? When should you choose one over the other?**
+
+### ✅ **Q7. How can you write a dynamic function to select any option from a custom dropdown?**
+
+### ✅ **Q8. How do you wait until the dropdown options are fully rendered before clicking?**
+
+<!-- Dropdown trigger -->
+<div id="dropdown" class="dropdown-toggle">
+  Select Country
+</div>
+
+<!-- Dropdown menu (appears after clicking trigger) -->
+<div class="dropdown-menu show">
+  <div class="dropdown-item">India</div>
+  <div class="dropdown-item">USA</div>
+  <div class="dropdown-item">Canada</div>
+  <div class="dropdown-item">Australia</div>
+</div>
+
+
+********************************************************************************************************************
+
+2. Locators Interview questions :
+
+Salesforce: New Task  
+---------------------
+
+Steps :
+1. Go to https://login.salesforce.com/?locale=in 
+2. And login using credentials. [username : ravindran.ramdas@testleaf.com, password : RaviSalesTest]
+3. Click on the "+" icon (6th icon from top right corner)
+4. Choose and click "New Event" from dropdown.
+5. Now get the xpath for "Subject" label web element.
+
+Hint : New Task  younger cousin to elder
+
+
+ 
+leaftaps: First leadid
+-----------------------
+
+Steps :
+1. Go to "http://leaftaps.com/opentaps/control/login" and login.
+2. Click CRM/SFA .
+3. Click "Leads" select the first lead from the list of leads
+
+leaftaps: First leadid paren to child
+
+ 
+Myntra: Checkbox
+----------------
+
+-> Go to mynthra.com choose "MEN" from the tan available.
+-> Select the check box of "Roadster" under the brands
+
+Myntra: Checkbox elder sibling to younger sibling
+
+****************************************************************************************************************
+
+Interview Questions Locators:
+--------------------------
+
+1. Can CSS move from child to parent like XPath?
+
+2. What’s the difference between page.locator() and page.$()?
+
+Playwright locator questions:
+---------------------------
+
+3. Difference between page.locator() and page.getBy*() locators?
+
+4. Difference between locator.click() and page.click("")?
+
+ 5. How does Playwright handle auto-waiting for locators?
+
+ 6. Difference between first(), last(), and nth() in locators?
+
+
+
+
+ 
+
+
+ 
