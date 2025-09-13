@@ -1,0 +1,16 @@
+1. JS Alert Confirmation (HerokuApp)
+Website: https://the-internet.herokuapp.com/javascript_alerts
+
+Question:
+
+A confirmation alert appears when clicking the "Click for JS Confirm" button.
+You need to dismiss the alert and verify that the result text is "You clicked: Cancel".
+
+How will you handle this using Playwright?
+
+How would your code react if the alert is not handled?
+
+How do you simulate both accept and cancel flows?
+////////////////////////////////////////////////////////////////////////////////////////
+
+ 

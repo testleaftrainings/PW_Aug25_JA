@@ -1,0 +1,110 @@
+### **TypeScript Interview Questions**
+
+1. What is TypeScript and how is it different from JavaScript?
+2. What are the benefits of using TypeScript in automation projects?
+3. What is type inference in TypeScript?
+4. Explain the use of "?" (optional parameter)** and "!" (non-null assertion)**.
+
+function greet(name?:string){
+
+console.log("Hello"+(name ? name :"Guest"))
+
+# //Internally:
+#   // if(name){
+#    Hello Ravi
+#    }
+#    else(){
+#    Hello Guest
+#    }
+
+}
+
+greet("Ravi")
+greet()
+
+
+
+5. What is a union type and how do you use it?
+6. Difference between `any`, `unknown`, `never`
+7. What is type assertion and how do you do it?
+
+let num : string = "Ravi"  --> Explicit infere
+
+let url = value as string // external database or any data file like csv , env, 
+
+let password = pwd as string // "Ravi#$%^"
+
+await page.goto(url)
+await page.locator("#username").fill("")
+await page.locator("#password").fill("")
+
+---
+
+### **Alerts Handling (Dialogs) in Playwright**
+
+1. How do you handle JavaScript alerts, confirms, and prompts in Playwright?
+2. What is `page.on('dialog')` and how do you use it?
+3. How do you test alert confirmation logic in Playwright??
+
+Handling alerts :
+
+if(alertName==='confirm'){
+    //alert===confirm
+    //confirm===confirm
+    type.dismiss()
+}else{
+    type.accept()
+}
+    })
+
+**Sample Code:**
+
+page.on('dialog', async dialog => {
+  console.log(dialog.message());
+  expect(dialog.message()).toBe("I am a JS Confirm")
+  await dialog.accept();  // or dialog.dismiss();
+});
+
+---
+
+###**Frames and iFrames in Playwright**
+
+1. How do you interact with elements inside an iframe?
+2. What is the difference between `page.frame()` and `frameLocator()`?
+
+page.frame() --> Selects a frame by name, URL, or index
+framelocator()--> directly locatesand autowaits for elements inside the frame
+
+3. How do you handle nested iframes?
+**Sample Code:**
+
+const frame1 = page.frame({ name: 'frameName' });
+await frame?.click('text=Submit'); // ?.Optional chaining operator
+
+Or with `frameLocator`:
+
+await page.frameLocator('#frameId').locator('text=Submit').click();
+
+---
+
+
+###Playwright Assertions
+
+
+1. What are assertions in Playwright?
+
+2. What are some commonly used Playwright assertions methods?
+
+3. How does Playwright handle auto-waiting in assertions?
+
+4. What is the difference between toHaveText() and toContainText() when applied to multiple elements?
+
+5. How do you assert numerical values with Playwright?
+
+6. How do you assert on soft expectations in Playwright?
+
+7. What is the timeout for assertions, and how can you customize it?
+
+await expect(page.locator("#status")).toHaveText("Success",{timeout:3000})
+
+

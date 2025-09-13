@@ -1,0 +1,143 @@
+
+## 🔹 **TypeScript Interview Questions**
+
+**Q1. What is TypeScript and how is it different from JavaScript?**
+TypeScript is a superset of JavaScript that adds static typing, interfaces, and compile-time error checking.
+
+**Q2. What are the benefits of using TypeScript in automation projects?**
+It improves code quality, reduces runtime errors, provides IntelliSense support, and makes tests easier to maintain.
+
+**Q3. What is type inference in TypeScript?**
+TypeScript automatically infers the type of a variable if not explicitly declared.
+Implicit inference. let num = 123
+Explicit inference --> let num:number =123
+
+**Q4. Explain the use of `?` (optional parameter) and `!` (non-null assertion).**
+`?` makes a parameter or property optional, while `!` tells the compiler that a value will never be `null` or `undefined`.
+
+// Example with "?"
+function greet(name?: string) {
+  console.log("Hello " + (name ? name : "Guest"));
+}
+
+greet();            // Hello Guest
+greet("Ravi");      // Hello Ravi
+
+// Example with "!"
+let username: string | null = "John";
+console.log(username!.toUpperCase());  // Compiler allows it because of "!"
+
+
+**Q5. What is a union type and how do you use it?**
+A union type allows multiple possible types for a variable, e.g., `let id: string | number;`.
+
+**Q6. Difference between `any`, `unknown`, and `never`.**
+
+* `any`: disables type checking.
+* `unknown`: type-safe version of `any` (requires checks before use).
+* `never`: represents values that should never occur, e.g., an error function.
+
+**Q7. What is type assertion and how do you do it?**
+Type assertion tells the compiler to treat a variable as a specific type, e.g., `let input = value as string;`.
+
+---
+
+## 🔹 **Alerts Handling (Dialogs) in Playwright**
+
+**Q1. How do you handle JavaScript alerts, confirms, and prompts in Playwright?**
+By listening to the `page.on('dialog')` event and using `dialog.accept()` or `dialog.dismiss()`.
+
+**Q2. What is `page.on('dialog')` and how do you use it?**
+It’s an event listener for dialogs that lets you capture the message and respond to it.
+
+**Q3. How do you test alert confirmation logic in Playwright?**
+Capture the dialog, verify its message, and then accept or dismiss it depending on the scenario.
+
+**Q4. How do you assert the alert text and accept or dismiss it?**
+
+```ts
+page.on('dialog', async dialog => {
+  expect(dialog.message()).toBe("Are you sure?");
+  await dialog.accept();
+});
+```
+
+---
+
+## 🔹 **Frames and iFrames in Playwright**
+
+**Q1. How do you interact with elements inside an iframe?**
+By using `frameLocator()` or `page.frame()` to switch to the frame, then interact with elements inside it.
+
+**Q2. What is the difference between `page.frame()` and `frameLocator()`?**
+
+* `page.frame()` → selects a frame by name, URL, or index.
+* `frameLocator()` → directly locates and auto-waits for elements inside frames.
+
+**Q3. How do you handle nested iframes?**
+By chaining `frameLocator()` calls, e.g.,
+
+```ts
+page.frameLocator('#outer').frameLocator('#inner').locator('button');
+```
+
+---
+
+###Playwright Assertions
+
+
+1. What are assertions in Playwright?
+
+Assertions are checks in your test that verify if the application’s actual behavior matches the expected behavior.
+
+2. What are some commonly used Playwright assertions?
+
+toHaveTitle() → checks page title
+
+toHaveURL() → checks current URL
+
+toBeVisible() → checks if element is visible
+
+toBeHidden() → checks if element is hidden
+
+toHaveText() → checks element text
+
+toBeEnabled() → checks if element is enabled
+
+3. How does Playwright handle auto-waiting in assertions?
+
+Playwright automatically waits until the assertion is true (up to the timeout), so you don’t need waitForTimeout() or sleep().
+
+4. What is the difference between toHaveText() and toContainText() when applied to multiple elements?
+
+toHaveText() → checks the exact text of the full list of elements in order.
+
+toContainText() → checks that each element’s text contains the given substring, not exact match.
+
+// Example: 3 list items => ["One", "Two", "Three"]
+
+await expect(page.locator('li')).toHaveText(["One", "Two", "Three"]);  // exact
+await expect(page.locator('li')).toContainText(["One", "Three"]);      // partial
+
+
+5. How do you assert numerical values with Playwright?
+
+You can use toBeGreaterThan, toBeLessThan, etc. with numbers.
+
+const price = await page.locator('.price').textContent();
+expect(Number(price)).toBeGreaterThan(100);
+
+6. How do you assert on soft expectations in Playwright?
+
+Soft assertions let tests continue even if the check fails.
+
+await expect.soft(page.locator('#msg')).toHaveText("Welcome");
+
+7. What is the timeout for assertions, and how can you customize it?
+
+Default: 5 seconds.
+
+You can override using { timeout: ms }.
+
+await expect(page.locator('#status')).toHaveText("Success", { timeout: 10000 });
+
