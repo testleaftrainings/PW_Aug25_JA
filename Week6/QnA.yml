@@ -1,0 +1,221 @@
+# ✅ THEORY QUESTIONS – Playwright + API Testing
+
+### 🔹 Basics of API Testing
+
+**1. What is API testing?**
+
+* API testing verifies that backend services (APIs) return correct responses for given requests.
+* Focuses on functionality, reliability, performance, and security of APIs without using the UI.
+
+**2. What is the difference between UI testing and API testing?**
+
+* **UI Testing** → Tests the user interface (buttons, forms, pages) that end-users interact with.
+* **API Testing** → Tests backend endpoints directly (faster, independent of UI).
+
+**3. What HTTP methods are commonly used in API testing?**
+
+* **GET** → Retrieve data
+* **POST** → Create new data
+* **PUT** → Update/replace existing data
+* **PATCH** → Partially update data
+* **DELETE** → Remove data
+
+**4. What is status code 200, 201, 204, 400, 401, 403, 404, 500?**
+
+* **200** → OK (success)
+* **201** → Created (resource created successfully)
+* **204** → No Content (success, but no response body)
+* **400** → Bad Request (invalid input)
+* **401** → Unauthorized (authentication required)
+* **403** → Forbidden (not enough permissions)
+* **404** → Not Found
+* **500** → Internal Server Error
+
+**5. What is the difference between PUT and PATCH requests?**
+
+* **PUT** → Replaces the entire resource.
+* **PATCH** → Updates only specific fields.
+
+**6. What are request headers and why are they important in API testing?**
+
+* Headers provide metadata about the request (e.g., `Authorization`, `Content-Type`, `Accept`).
+* Important for authentication, content negotiation (JSON/XML), and caching.
+
+**7. What is JSON and how is it used in API requests and responses?**
+
+* JSON (JavaScript Object Notation) is a lightweight format for sending/receiving data.
+* APIs often use JSON in request bodies (`POST/PUT`) and response payloads.
+
+---
+
+### 🔹 Playwright-Specific API Questions
+
+**1. How does Playwright support API testing?**
+
+* Playwright has an **APIRequestContext** for sending API requests (`GET`, `POST`, etc.) directly.
+* Allows testing APIs alongside UI within the same framework.
+
+**2. What is `request.newContext()` in Playwright?**
+
+* Creates a new **API context** (like a browser context, but for APIs).
+* Lets you define base URL, headers, and authentication once for all requests.
+
+**3. Can Playwright be used to test APIs without opening a browser?**
+
+* Yes ✅. Playwright can run **headless API tests** without launching any browser.
+
+**4. How do you pass authentication tokens in Playwright API requests?**
+
+* Add token in request headers:
+
+ test(`Create a Lead in Salesforce`, async ({ request }) => {
+
+    const response = await request.post(`${inst_url}/services/data/v64.0/sobjects/Lead/`,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `${tokenType} ${token}`
+            },
+            data: {
+            "lastname": "RavindranRamdas",
+            "company": "TestleafQeagle"
+
+        }
+    })
+
+
+**5. How can API testing be integrated with browser-based testing in Playwright?**
+
+* Example:
+
+  * Use API to **create a user/session** → get auth token.
+  * Use that token in browser context → skip login UI.
+
+**6. What are the limitations of API testing using Playwright compared to Postman or REST Assured?**
+
+* Playwright’s API testing is **basic** (good for integration with UI tests).
+* Postman/REST Assured are more feature-rich for:
+
+  * Extensive assertions
+  * Advanced data-driven testing
+  * Load/performance testing
+
+---
+
+### 🔹 Real-Time & Advanced
+
+**1. Explain a scenario where you use API testing with Playwright before doing a UI action.**
+
+* Example: Create a user via API → log in with that user in UI.
+* This avoids wasting time navigating through signup forms.
+
+**2. How do you validate API response time using Playwright?**
+
+* Capture timing metadata:
+
+  console.log(response.status(), response.request().timing());
+
+* Or use performance assertions (`expect(response).toBeTruthy()`, etc.).
+
+**3. What are some challenges you faced while integrating API and UI tests in Playwright?**
+
+* Keeping test data consistent between API & UI.
+* Managing authentication/session tokens across layers.
+* Flaky tests if API is unstable.
+
+---
+
+# ✅ PRACTICAL / HANDS-ON QUESTIONS
+
+**1. Write a Playwright script to send a GET request and validate the response status is 200.**
+
+
+test(`Fetch the incident using Playwright with API`,async ({request}) => {
+    const response = await request.get(`https://dev356721.service-now.com/api/now/table/incident/${id}`,
+    {
+        headers:{
+             "Content-Type": "application/json",
+             "Authorization": "Basic YWRtaW46SD1adDl4RUB1ZTlQ"
+        }
+    })
+    const respons = await response.json()
+    console.log(respons);
+
+    console.log(response.status());
+    console.log(response.statusText());    
+
+})
+
+
+---
+
+**2. Send a POST request to create a user and validate response body contains expected fields.**
+
+
+test('POST request - create user', async () => {
+  const apiContext = await request.newContext();
+  const response = await apiContext.post('https://reqres.in/api/users', {
+    data: { name: 'Ravi', job: 'Tester' }
+  });
+  const body = await response.json();
+  expect(response.status()).toBe(201);
+  expect(body).toHaveProperty('id');
+  expect(body.name).toBe('Ravi');
+});
+
+
+---
+
+**3. How do you extract a value from the API response (like userId) and use it in the next request?**
+
+
+test('Extract value and reuse', async () => {
+  const apiContext = await request.newContext();
+  const createResp = await apiContext.post('https://reqres.in/api/users', {
+    data: { name: 'Ravi', job: 'QA' }
+  });
+  const body = await createResp.json();
+  const userId = body.id;
+
+  const getResp = await apiContext.get(`https://reqres.in/api/users/${userId}`);
+  expect(getResp.status()).toBe(200);
+});
+
+
+---
+
+**4. Write a Playwright test to send an API request and use the result in the UI test.**
+
+
+test('API + UI integration', async ({ page, request }) => {
+  const apiContext = await request.newContext();
+  const response = await apiContext.post('https://reqres.in/api/login', {
+    data: { email: 'eve.holt@reqres.in', password: 'cityslicka' }
+  });
+  const body = await response.json();
+  const token = body.token;
+
+  // Use token in UI (skip login form)
+  await page.addInitScript(token => {
+    localStorage.setItem('authToken', token);
+  }, token);
+
+  await page.goto('https://example.com/dashboard');
+  await expect(page.locator('h1')).toHaveText('Dashboard');
+});
+
+---
+
+**5. How to send custom headers like Auth token or Content-Type in your API request?**
+
+test('Custom headers', async () => {
+  const apiContext = await request.newContext({
+    extraHTTPHeaders: {
+      Authorization: `Bearer myToken123`,
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const response = await apiContext.get('https://reqres.in/api/users/2');
+  expect(response.status()).toBe(200);
+});

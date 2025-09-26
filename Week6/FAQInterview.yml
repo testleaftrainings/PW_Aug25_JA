@@ -1,0 +1,47 @@
+Questions for Job Assistance Week6 :
+
+API with playwright 
+
+## 🔹 THEORY QUESTIONS – Playwright + API Testing
+
+### ✅ Basics of API Testing
+
+1. **What is API testing?**
+
+2. **What is the difference between UI testing and API testing?**
+3. **What HTTP methods are commonly used in API testing?**
+4. **What is status code 200, 201, 204, 400, 401, 403, 404, 500?**
+5. **What is the difference between PUT and PATCH requests?**
+6. **What are request headers and why are they important in API testing?**
+7. **What is JSON and how is it used in API requests and responses?**
+
+---
+
+### ✅ Playwright-Specific API Questions
+
+1. **How does Playwright support API testing?**
+2. **What is `request.newContext()` in Playwright?**
+3. **Can Playwright be used to test APIs without opening a browser?**
+4. **How do you pass authentication tokens in Playwright API requests?**
+5. **How can API testing be integrated with browser-based testing in Playwright?**
+7. **What are the limitations of API testing using Playwright compared to tools like Postman or REST Assured?**
+
+---
+
+  ### ✅ Real-Time & Advanced
+
+  1. **Explain a scenario where you use API testing with Playwright before doing a UI action.**
+  2. **How do you validate API response time using Playwright?**
+  3. **What are some challenges you faced while integrating API and UI tests in Playwright?**
+
+---
+
+## 🔹 PRACTICAL / HANDS-ON QUESTIONS
+
+###  Basic Examples
+
+1. **Write a Playwright script to send a GET request and validate the response status is 200.**
+2. **Send a POST request to create a user and validate response body contains expected fields.**
+3. **How do you extract a value from the API response (like userId) and use it in the next request?**
+4. **Write a Playwright test to send an API request and use the result in the UI test.**
+5. **How to send custom headers like Auth token or Content-Type in your API request?**
